@@ -5,13 +5,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="styles.css">
-  <title>Vanilla JavaScript App</title>
+  <title>Club 15 Camera App</title>
 </head>
 
 <body>
-  <main>
-    <h1>Vanilla JavaScript App</h1>
-  </main>
+  <header id="header">
+    <div class="center">
+      <h1 style="color: white;">Kids can Save Animals : Camera App</h1>
+    </div>
+  </header>
+  <div id="main" class="main center">
+    <div class="cameraview">
+      <div>
+        <iframe id="twitter-widget-0" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true"
+          class="twitter-share-button twitter-share-button-rendered twitter-tweet-button"
+          style="position: static; visibility: visible; width: 60px; height: 20px;" title="Twitter Tweet Button"
+          src="https://platform.twitter.com/widgets/tweet_button.63899b173766ee6f8a729a72b542b0fb.en.html#dnt=false&amp;id=twitter-widget-0&amp;lang=en&amp;original_referer=https%3A%2F%2Fdavidwalsh.name%2Fdemo%2Fcamera.php&amp;size=m&amp;text=Camera%20and%20Video%20Control%20with%20HTML5%20Example&amp;time=1618997544941&amp;type=share&amp;url="></iframe>
+      </div>
+      <div class="greenbox">
+        Instruction : <a href="https://github.com/aiadvocates/CustomVision-Workshop" target="_top">Custom Vision -
+          Workshop</a>
+      </div>
+      <p class="intro">Using web browser, take picture and run Artificial Intelligence!!</p>
+      <video id="webcam" width="640" height="480" autoplay></video>
+      <button id="takePhoto" class="coolbutton" style="width: 640px;">Take Photo!</button>
+      <canvas id="canvas" width="640" height="480"></canvas>
+    </div>
+  </div>
+  <script>
+    var webcam = document.getElementById('webcam');
+    var canvas = document.getElementById('canvas');
+    var context = canvas.getContext('2d');
+
+    // Get access to the camera!
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
+        webcam.srcObject = stream;
+        webcam.play();
+      });
+    }
+
+    // Trigger photo take
+    document.getElementById("takePhoto").addEventListener("click", function () {
+      context.drawImage(webcam, 0, 0, 640, 480);
+    });
+  </script>
 </body>
 
 </html>
